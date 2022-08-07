@@ -61,10 +61,9 @@ class LinkedList {
   }
   at(index) {
     if (this.head === null) return null;
-    if (index === 1) return this.head;
+    if (index === 0) return this.head;
     if (index > this.size()) return 'Not found';
     let temp = this.head;
-    let count = 1;
     while (count < index) {
       ++count;
       temp = temp.next;
@@ -92,6 +91,33 @@ class LinkedList {
       console.log(print);
     } else console.log('List is empty');
   }
+  insertAt(x, index) {
+    if (index < 0) return console.log('Enter a valid index');
+    if (index > this.size()) return console.log('Index greater than list-size');
+    if (index === 0) this.prepend(x);
+    else if (index === 1) {
+      let temp = this.head;
+      let insert = this.head.next;
+      temp.next = new Node(x);
+      temp.next.next = insert;
+    } else {
+      let temp = this.head;
+      let i = 0;
+      let cur = temp;
+      let prev = temp;
+      while (i !== index - 1 && temp !== null) {
+        prev = temp;
+        temp = temp.next;
+        cur = temp.next;
+        ++i;
+      }
+      if (temp == null) prev.next = new Node(x);
+      else {
+        temp.next = new Node(x);
+        temp.next.next = cur;
+      }
+    }
+  }
 }
 
 let testList = new LinkedList();
@@ -107,4 +133,6 @@ testList.toString();
 
 testList.prepend(5);
 testList.toString();
-console.log(testList.size());
+
+testList.insertAt(113, 0);
+testList.toString();
