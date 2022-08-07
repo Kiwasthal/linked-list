@@ -88,7 +88,7 @@ class LinkedList {
         if (temp !== null) print += ` (${temp.datum}) ->`;
         temp = temp.next;
       }
-      console.log(print);
+      console.log(`${print} (null)`);
     } else console.log('List is empty');
   }
   insertAt(x, index) {
@@ -118,7 +118,7 @@ class LinkedList {
       }
     }
   }
-  delete(x) {
+  remove(x) {
     if (x !== this.head.datum) {
       let prev = this.head;
       let temp = this.head;
@@ -140,7 +140,7 @@ class LinkedList {
   removeAt(index) {
     if (index < 0) return console.log('Enter a valid index');
     if (index > this.size()) return console.log('Index greater than list-size');
-    else if (index === 0) this.delete(this.head.datum);
+    else if (index === 0) this.remove(this.head.datum);
     else {
       let i = 0;
       let temp = this.head;
@@ -148,7 +148,7 @@ class LinkedList {
         temp = temp.next;
         i++;
       }
-      this.delete(temp.next.datum);
+      this.remove(temp.next.datum);
     }
   }
 }
