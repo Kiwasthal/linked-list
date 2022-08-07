@@ -26,9 +26,10 @@ class LinkedList {
   }
   size() {
     let size = 0;
-    if (head === null) return size;
+    if (this.head === null) return size;
     else {
       let temp = this.head;
+      size = 1;
       while (temp.next !== null) {
         temp = temp.next;
         ++size;
@@ -61,21 +62,49 @@ class LinkedList {
   at(index) {
     if (this.head === null) return null;
     if (index === 1) return this.head;
+    if (index > this.size()) return 'Not found';
     let temp = this.head;
     let count = 1;
-    while (count <= index) {
+    while (count < index) {
       ++count;
-      if (temp.next === null) return 'Not found';
       temp = temp.next;
     }
     return temp;
   }
   contains(x) {
-    let temp = this.head;
-    while (temp.next !== null) {
-      if (temp.datum === x) return true;
-      temp = temp.next;
+    if (this.head != null) {
+      let temp = this.head;
+      while (temp !== null) {
+        if (temp.datum === x) return true;
+        temp = temp.next;
+      }
     }
     return false;
   }
+  toString() {
+    let print = '';
+    if (this.head !== null) {
+      let temp = this.head;
+      while (temp !== null) {
+        if (temp !== null) print += ` (${temp.datum}) ->`;
+        temp = temp.next;
+      }
+      console.log(print);
+    } else console.log('List is empty');
+  }
 }
+
+let testList = new LinkedList();
+
+testList.append(1);
+testList.toString();
+
+testList.prepend(2);
+testList.toString();
+
+testList.append(12);
+testList.toString();
+
+testList.prepend(5);
+testList.toString();
+console.log(testList.size());
